@@ -26,9 +26,9 @@ app.post('/webhook', (req, res) => {
     req.body.entry.forEach((entry) => {
       entry.messaging.forEach((event) => {
         if (event.message && event.message.text) {
-          sendMessage(event, roll);
+          sendMessage(event, 1);
         } else if (event.postback && event.postback.payload === 'Started') {
-          sendMessage(event);
+          sendMessage(event, 0);
         }
       });
     });
@@ -41,7 +41,7 @@ function sendMessage(event, r) {
   let text = event.message.text;
   var msg;
     
-if (r = roll) {
+if (r = 1) {
     roll();
     msg = 'Du trillet: ' + readDice(x) + readDice(y);
 } else {
