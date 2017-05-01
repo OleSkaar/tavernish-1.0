@@ -27,9 +27,8 @@ app.post('/webhook', (req, res) => {
       entry.messaging.forEach((event) => {
         if (event.message && event.message.text) {
           sendMessage(event, roll);
-        } else if (event.postback && event.postback.payload === "GET_STARTED") {
+        } else if (event.postback && event.postback.payload === 'Started') {
           sendMessage(event, noRoll);
-          sendMessage(event, roll);
         }
       });
     });
