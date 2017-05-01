@@ -48,7 +48,7 @@ if (r === 1) {
     roll();
     msg = 'Du trillet: ' + readDice(x) + readDice(y);
 } else {
-    msg = 'Hi, {{user_first_name}}! Type anything to roll a dice.';
+    msg = 'Welcome! Type anything to roll a dice.';
 }
     
       request({
