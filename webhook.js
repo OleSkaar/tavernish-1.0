@@ -26,7 +26,9 @@ app.post('/webhook', (req, res) => {
     req.body.entry.forEach((entry) => {
       entry.messaging.forEach((event) => {
         if (event.message && event.message.text) {
-          sendMessage(event);
+          sendMessage(event, roll);
+        } else if (event.postback && event.postback.payload === "GET_STARTED") {
+          sendMessage(event, noRoll);
         }
       });
     });
@@ -34,18 +36,25 @@ app.post('/webhook', (req, res) => {
   }
 });
 
-function sendMessage(event) {
+function sendMessage(event, r) {
   let sender = event.sender.id;
   let text = event.message.text;
-roll();
-
+  var msg;
+    
+if (r = roll) {
+    roll();
+    msg = 'Du trillet: ' + readDice(x) + readDice(y);
+} else {
+    msg = 'Hi, {{user_first_name}}! Type anything to roll a dice.'
+}
+    
       request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {access_token: 'EAAYJX5ZAqnfsBADSDZA3SpOvoOafZBGKN1QZCPKMWhDEvq3ZA4Ld5FpKVM307BsLxxkkXkE99s7oe9SlLo89S6P96BSHYzsyUKOFY95Ag6tkMo4YXX3zZCsJlSqMtW21vpcy1wZC7drW6PqmIJ5PwRZBSSLpTZCFxx8N1SWYrVAzZBDwZDZD'},
     method: 'POST',
     json: {
       recipient: {id: sender},
-      message: {text:'Du trillet: ' + readDice(x) + readDice(y)}
+      message: {text: msg}
     }
   }, function (error, response) {
     if (error) {
