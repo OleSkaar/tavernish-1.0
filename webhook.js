@@ -29,6 +29,7 @@ app.post('/webhook', (req, res) => {
           sendMessage(event, 1);
         } else if (event.postback && event.postback.payload === 'Started') {
           console.log('Get started fired');
+          sendMessage(event, 0);
         }
       });
     });
@@ -38,7 +39,7 @@ app.post('/webhook', (req, res) => {
 
 function sendMessage(event, r) {
   let sender = event.sender.id;
-if (event.message.text) { 
+if (event.message) { 
     let text = event.message.text;
 }
   var msg;
