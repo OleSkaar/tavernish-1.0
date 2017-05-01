@@ -22,6 +22,8 @@ app.get('/webhook', (req, res) => {
 /* Handling all messenges */
 app.post('/webhook', (req, res) => {
   console.log(req.body);
+  console.log('Request = ' + req);
+  console.log('Request body = ' + req.body.object.entry.messaging);
   if (req.body.object === 'page') {
     req.body.entry.forEach((entry) => {
       entry.messaging.forEach((event) => {
@@ -45,7 +47,7 @@ if (r = 1) {
     roll();
     msg = 'Du trillet: ' + readDice(x) + readDice(y);
 } else {
-    msg = 'Hi, {{user_first_name}}! Type anything to roll a dice.'
+    msg = 'Hi, {{user_first_name}}! Type anything to roll a dice.';
 }
     
       request({
