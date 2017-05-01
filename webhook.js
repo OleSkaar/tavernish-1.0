@@ -42,9 +42,9 @@ function sendMessage(event, r) {
 if (event.message) { 
     let text = event.message.text;
 }
-  var msg;
+var msg;
     
-if (r = 1) {
+if (r === 1) {
     roll();
     msg = 'Du trillet: ' + readDice(x) + readDice(y);
 } else {
