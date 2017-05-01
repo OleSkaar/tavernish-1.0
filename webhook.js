@@ -22,8 +22,6 @@ app.get('/webhook', (req, res) => {
 /* Handling all messenges */
 app.post('/webhook', (req, res) => {
   console.log(req.body);
-  console.log('Request = ' + req);
-  console.log('Request body = ' + req.body.object.entry.messaging);
   if (req.body.object === 'page') {
     req.body.entry.forEach((entry) => {
       entry.messaging.forEach((event) => {
@@ -40,7 +38,9 @@ app.post('/webhook', (req, res) => {
 
 function sendMessage(event, r) {
   let sender = event.sender.id;
-  let text = event.message.text;
+if (event.message.text) { 
+    let text = event.message.text;
+}
   var msg;
     
 if (r = 1) {
