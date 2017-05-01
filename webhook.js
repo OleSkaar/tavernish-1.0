@@ -28,7 +28,7 @@ app.post('/webhook', (req, res) => {
         if (event.message && event.message.text) {
           sendMessage(event, 1);
         } else if (event.postback && event.postback.payload === 'Started') {
-          sendMessage(event, 0);
+          console.log('Get started fired');
         }
       });
     });
