@@ -10,7 +10,7 @@ const server = app.listen(process.env.PORT || 5000, () => {
   console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
 });
 
-app.use(express.static('public'))
+app.use(express.static('public', {'extensions': ['html']}))
 
 
 /* For Facebook Validation */
