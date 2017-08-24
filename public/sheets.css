@@ -1,0 +1,129 @@
+body {
+    font-family: Courier New, sans-serif;
+    width: 100%;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+    color: inherit; 
+    text-decoration: inherit; 
+}
+
+h1, h2 {
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+
+h2 {
+    display: inline-block;
+    width: 100%;
+    font-weight: 500;
+}
+
+button {
+    border      : 0;
+    background  : transparent;
+    font-family : inherit;
+    cursor      : pointer;
+    font-size: 16px;
+    margin: 5px 2px 5px 2px;
+    width: 48%;
+    max-width: 250px;
+    padding: 7px;
+    
+    -webkit-transition: all 0.1s;
+	-moz-transition: all 0.1s;
+	-ms-transition: all 0.1s;
+	-o-transition: all 0.1s;
+	transition: all 0.1s;
+}
+
+
+
+button:active {
+    top: 5px;
+    border-bottom: 4px solid rgb(85,107,47);
+    position: relative;
+}
+
+
+button::-moz-focus-inner{
+  padding : 0;
+  border  : 0;
+}
+
+button[disabled] {
+  background-color: #cccccc;
+  color: #666666;
+}
+
+section {
+    width: 100%;
+    max-width: 720px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+p {
+    display: inline-block;
+    width: 100%;
+    max-width: 504px;
+    text-align: center;
+    font-size: 18px;
+    padding: 0;
+    margin: 10px;
+}
+
+.grey {
+    background-color: darkgray;
+    border-bottom: 5px solid rgb(47,79,79);
+}
+
+.orange {
+    background-color: darkorange;
+    border-bottom: 5px solid rgb(139,69,19);
+}
+
+.green {
+    background-color: olivedrab;
+    border-bottom: 5px solid rgb(85,107,47);
+}
+
+.blue {
+    background-color: dodgerblue;
+    border-bottom: 5px solid rgb(12,57,102);
+    margin-bottom: 15px;
+}
+
+.doubles {
+    font-size: 14px;
+}
+
+#diceRoll {
+    font-size: 15px;
+    line-height: 1.25em;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#result {
+    display: flex;
+    font-size: 14px;
+    border-bottom: 1px solid black;
+    max-width: 504px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+
+/*
+Button styling:
+<div style="max-width: 145px; color: rgb(255, 255, 255); font-size: 15px; padding: 15px 6px 15px 59px; text-align: left; margin: 0px auto 10px; cursor: pointer; font-family: &quot;Open Sans&quot;; font-weight: 300; background: rgb(0, 69, 124) url(&quot;/Grafisk-markedFiles/icons/newsletter.png&quot;) no-repeat scroll 17px 21px / 25px 28px; border-bottom: 5px solid rgb(0, 47, 84); border-color: rgb(0, 47, 84);" onmouseover="this.style.backgroundColor='#092c4a', this.style.borderColor='#000000'" onmouseout="this.style.backgroundColor='#00457c', this.style.borderColor='#002f54'">Motta nyheter<br>fra BI</div>
+*/
