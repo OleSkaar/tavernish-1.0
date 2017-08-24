@@ -48,7 +48,7 @@ var UIController = (function() {
 
                 names.forEach (function(current) {
                     var name, para;
-                    name = '<h2><a href= "./' + current.ln + '.html">' + current.fn + ' ' + current.ln + '</a></h2>';
+                    name = '<h2><a href= "./' + (current.ln.toLowerCase()) + '.html">' + current.fn + ' ' + current.ln + '</a></h2>';
                     para = document.getElementById(DOMstrings.list);
                     para.insertAdjacentHTML('afterbegin', name);
 
