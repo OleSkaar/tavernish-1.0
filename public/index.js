@@ -90,7 +90,7 @@ var controller = (function(dataCtrl, UICtrl) {
             }
             */
             if (psid !== undefined) {
-                document.getElementById('name').innerHTML = psid;
+                document.getElementById('name').innerHTML = 'LOL';
                 /*
                 psid = psid.toString();
                 var uri = dataCtrl.loopChars(psid).toLowerCase();
