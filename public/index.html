@@ -9,7 +9,6 @@
 <body>
     
 <script>
-  var psid;
   (function(d, s, id){
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
@@ -20,13 +19,16 @@
 </script>  
     
 <script>
+    var psid = 0;
     window.extAsyncInit = function() {
         console.log('the Messenger Extensions JS SDK is done loading');
         MessengerExtensions.getUserID(function success(uids) {
   	
             // User ID was successfully obtained. 
-            document.getElementById('name').innerHTML = 'PSID found.'
+            
+            
             psid = uids.psid;
+            document.getElementById('name').innerHTML = psid;
             
   
         }, function error(err, errorMessage) {      
@@ -44,7 +46,7 @@
 </header>
     
 <hr>
-<section id="result"></section>
+<section id="result"></section> 
 
 <script src="characters.js"></script>
 <script src="index.js"></script>

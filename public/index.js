@@ -89,6 +89,7 @@ var controller = (function(dataCtrl, UICtrl) {
             window.location.replace(uri);
             }
             */
+            console.log(psid);
             if (psid !== undefined) {
                 
                 document.getElementById('result').innerHTML = 'PSID is also not undefined.';
