@@ -111,4 +111,4 @@ var controller = (function(dataCtrl, UICtrl) {
     
 })(dataController, UIController);
 
-controller.init();
+
