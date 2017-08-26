@@ -25,7 +25,8 @@
         MessengerExtensions.getUserID(function success(uids) {
   	
             // User ID was successfully obtained. 
-            var psid = uids.psid;
+            psid = uids.psid;
+            
   
         }, function error(err, errorMessage) {      
   	         console.log('No PSID available.');
