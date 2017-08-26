@@ -67,6 +67,10 @@ var controller = (function(dataCtrl, UICtrl) {
         init: function() {
             console.log('Application has started.');
             
+            //0. Check if a messenger page-scoped ID is available. 
+            // If it is, search for a match in characters.js and load the right page
+            
+            
             // 1. Load the names of all characters
             var names = dataCtrl.loadCharNames();
             
