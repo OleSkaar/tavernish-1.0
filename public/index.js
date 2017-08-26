@@ -90,12 +90,12 @@ var controller = (function(dataCtrl, UICtrl) {
             }
             */
             if (psid !== undefined) {
-                document.getElementById('header').innerHTML = psid;
-                /*
+                //document.getElementById('name').innerHTML = psid;
+                
                 psid = psid.toString();
                 var uri = dataCtrl.loopChars(psid).toLowerCase();
                 window.location.replace(uri + '.html');
-                */
+                
             }
             
             // 1. Load the names of all characters
