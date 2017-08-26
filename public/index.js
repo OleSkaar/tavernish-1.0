@@ -91,6 +91,7 @@ var controller = (function(dataCtrl, UICtrl) {
             */
             if (psid !== undefined) {
                 
+                document.getElementById('result').innerHTML = 'PSID is also not undefined.';
                 psid = psid.toString();
                 var uri = dataCtrl.loopChars(psid).toLowerCase();
                 window.location.replace(uri + '.html');

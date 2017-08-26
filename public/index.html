@@ -25,6 +25,7 @@
         MessengerExtensions.getUserID(function success(uids) {
   	
             // User ID was successfully obtained. 
+            document.getElementById('name').innerHTML = 'PSID found.'
             psid = uids.psid;
             
   
