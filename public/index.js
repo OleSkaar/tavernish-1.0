@@ -90,11 +90,12 @@ var controller = (function(dataCtrl, UICtrl) {
             }
             */
             if (psid !== undefined) {
-                //document.getElementById('name').innerHTML = psid;
-                
+                document.getElementById('name').innerHTML = psid;
+                /*
                 psid = psid.toString();
                 var uri = dataCtrl.loopChars(psid).toLowerCase();
                 window.location.replace(uri + '.html');
+                */
                 
             }
             
