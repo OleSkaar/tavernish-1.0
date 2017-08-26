@@ -25,7 +25,7 @@
   	// User ID was successfully obtained. 
       	var psid = uids.psid;
             console.log('User ID: ' + psid);
-            alert(psid);
+            document.getElementById('header').innerHTML = psid;
   
     }, function error(err, errorMessage) {      
   	// Error handling code
