@@ -13,6 +13,19 @@ var dataController = (function() {
     chars = characters;
     
     return {
+        
+    loopChars: function(psid) {
+        var uri;
+        
+        chars.map(function (current) {
+            if (current.id === psid) {
+                uri = current.lastName;
+            }
+            })
+        
+        return uri
+            
+        },
     
     loadCharNames: function() {
         var names;
@@ -69,7 +82,11 @@ var controller = (function(dataCtrl, UICtrl) {
             
             //0. Check if a messenger page-scoped ID is available. 
             // If it is, search for a match in characters.js and load the right page
-            
+            if (sessionStorage.psid !== undefined) {
+            var psid = sessionStorage.psid.toString();
+            var uri = dataCtrl.loopChars(psid).toLowerCase();
+            window.location.replace(uri);
+            }
             
             // 1. Load the names of all characters
             var names = dataCtrl.loadCharNames();
