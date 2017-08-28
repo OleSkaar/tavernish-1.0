@@ -73,7 +73,7 @@ var UIController = (function() {
 })();
 
 // GLOBAL CONTROLLER
-var controller = (function(dataCtrl, UICtrl, psid) {
+var controller = (function(dataCtrl, UICtrl) {
        
     
        return {
@@ -89,7 +89,7 @@ var controller = (function(dataCtrl, UICtrl, psid) {
             window.location.replace(uri);
             }
             */
-            
+            var psid = sessionStorage.getItem('psid');
             
             if (psid !== undefined) {
                 
@@ -111,6 +111,6 @@ var controller = (function(dataCtrl, UICtrl, psid) {
    }
 
     
-})(dataController, UIController, psid);
+})(dataController, UIController);
 
 
