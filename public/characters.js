@@ -72,5 +72,24 @@ var characters = [
         {"average": ["Øgleledd/Blodøye", "Whisky"]},
         {"fair": ["Clawcontrol"]}
     ]
+},
+    {
+    "id":"",
+    "firstName":"Jack",
+    "middleName": "T.",
+    "lastName":"Russell",
+    "rank": "Kaptein",
+    "skills":[
+        { "poor":[]},
+        { "average":["Snike", "Løpe", "Flaks", "Observasjon", "Førstehjelp"]},
+        { "fair":["Eksplosiver", "Hundeføring", "Nærkamp", "Reaksjon"]},
+        { "good":["Pistol", "Atletisk"]},
+        { "great":[]},
+        { "excellent":[]}
+    ],
+    "bioskills": [
+        {"average": []},
+        {"fair": ["Slukke lys", "Mørkesyn"]}
+    ]
 }
     ];

@@ -91,7 +91,7 @@ var controller = (function(dataCtrl, UICtrl) {
             */
             var psid = sessionStorage.getItem('psid');
             
-            if (psid !== undefined) {
+            if (psid !== null) {
                 
                 document.getElementById('result').innerHTML = psid;
                 var uri = dataCtrl.loopChars(psid).toLowerCase();
