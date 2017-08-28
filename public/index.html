@@ -19,13 +19,12 @@
 </script>  
     
 <script>
-    var psid = 0;
+    var psid;
     window.extAsyncInit = function() {
         console.log('the Messenger Extensions JS SDK is done loading');
         MessengerExtensions.getUserID(function success(uids) {
   	
             // User ID was successfully obtained. 
-            
             
             psid = uids.psid;
             document.getElementById('name').innerHTML = psid;

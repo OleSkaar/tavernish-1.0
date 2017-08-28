@@ -18,7 +18,7 @@ var dataController = (function() {
         var uri;
         
         chars.map(function (current) {
-            if (current.id === psid) {
+            if (current.id == psid) {
                 uri = current.lastName;
             }
             })
@@ -89,19 +89,17 @@ var controller = (function(dataCtrl, UICtrl) {
             window.location.replace(uri);
             }
             */
-            console.log(psid);
-            window.location.replace('mckenna.html');
-            /*
+            
+            
             if (psid !== undefined) {
                 
-                document.getElementById('result').innerHTML = 'PSID is also not undefined.';
-                psid = psid.toString();
+                document.getElementById('result').innerHTML = psid;
                 var uri = dataCtrl.loopChars(psid).toLowerCase();
-                window.location.replace('mckenna.html');
+                window.location.replace(uri + '.html');
                 
                 
             }
-            */
+            
             
             // 1. Load the names of all characters
             var names = dataCtrl.loadCharNames();
