@@ -53,5 +53,24 @@ var characters = [
     ],
     "bioskills": [
     ]
+},
+    {
+    "id":"1903909256301513",
+    "firstName":"Jean",
+    "middleName": "L.",
+    "lastName":"Lupin",
+    "rank": "Oberst",
+    "skills":[
+        { "poor":[]},
+        { "average":["Mekanikk", "Sappør (KA-Boom.)", "Flaks", "Snakke med folk av ymse slag og av forskjellige lag og samfunnssjikt"]},
+        { "fair":["Pistol", "Snike", "Refleks", "Obersvasjon"]},
+        { "good":["Aviasjon"]},
+        { "great":["Heavy Gun"]},
+        { "excellent":[]}
+    ],
+    "bioskills": [
+        {"average": ["Øgleledd/Blodøye", "Whisky"]},
+        {"fair": ["Clawcontrol"]}
+    ]
 }
     ];
