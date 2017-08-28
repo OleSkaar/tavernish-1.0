@@ -73,7 +73,7 @@ var UIController = (function() {
 })();
 
 // GLOBAL CONTROLLER
-var controller = (function(dataCtrl, UICtrl) {
+var controller = (function(dataCtrl, UICtrl, psid) {
        
     
        return {
@@ -111,6 +111,6 @@ var controller = (function(dataCtrl, UICtrl) {
    }
 
     
-})(dataController, UIController);
+})(dataController, UIController, psid);
 
 
