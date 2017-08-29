@@ -156,7 +156,11 @@ var UIController = (function() {
         },
         
         printNameAndRank: function(char) {
+            if (char.middleName === '') {
+            name = char.firstName + ' ' + char.lastName;
+            } else {
             name = char.firstName + ' ' + char.middleName + ' ' + char.lastName;
+            }
             document.getElementById(DOMstrings.name).innerHTML = name;
             
             var rank = char.rank
