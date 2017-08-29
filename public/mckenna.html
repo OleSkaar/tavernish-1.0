@@ -22,29 +22,14 @@
 <script>
 var share;
   window.extAsyncInit = function() {
-          var messageToShare = {
-      "attachment":{
-         "type":"template",
-         "payload":{
-             "template_type":"generic",
-             "elements": [{
-                 "title":"I took Peter's 'Which Hat Are You?' Quiz",
-                 "image_url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-                 "subtitle": "My result: Fez",
-                 "default_action":{
-                     "type":"web_url",
-                     "url": "https://bot.peters-hats.com/view_quiz_results.php?user=24601"
-                 },
-                 "buttons":[{
-                     "type":"web_url",
-                     "url":"https://bot.peters-hats.com/hatquiz.php?referer=24601",
-                     "title":"Take the Quiz"
-                 }]
-             }]
+     function newMessage (text) {
+            var messageToShare = {
+                "message":{
+                "text": text
+                }
+            };
          }
-      }
-    };
-      share =  function() {
+      share =  function(text) {
         MessengerExtensions.beginShareFlow(function success(response) {
             if(response.is_sent === true){ 
       	         // User shared. We're done here!
@@ -58,10 +43,9 @@ var share;
         function error(errorCode, errorMessage) {      
   	             // An error occurred trying to share!
             },
-        messageToShare,
+        newMessage(text),
         "current_thread");
     }
-    share();
     console.log('the Messenger Extensions JS SDK is done loading'); 
   };
 </script>    
