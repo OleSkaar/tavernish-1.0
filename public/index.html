@@ -17,22 +17,35 @@
   fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'Messenger'));
 </script>  
+<script src="characters.js"></script>
     
 <script>
     
     window.extAsyncInit = function() {
-        var psid;
+        var psid, chars, uri;
         console.log('the Messenger Extensions JS SDK is done loading');
         MessengerExtensions.getUserID(function success(uids) {
   	
             // User ID was successfully obtained. 
             
             psid = uids.psid;
+            chars = characters;
+            
+            chars.map(function (current) {
+            if (current.id == psid) {
+                uri = current.lastName;
+            }
+            })
+            
+            window.location.replace(uri + '.html')
+            /*
             sessionStorage.setItem('psid', psid);
             document.getElementById('name').innerHTML = psid;
+            */
             
   
-        }, function error(err, errorMessage) {      
+        }, function error(err, errorMessage) {  
+            
   	         console.log('No PSID available.');
         });
     controller.init();
@@ -49,7 +62,7 @@
 <hr>
 <section id="result"></section> 
 
-<script src="characters.js"></script>
+
 <script src="index.js"></script>
     
 </body>

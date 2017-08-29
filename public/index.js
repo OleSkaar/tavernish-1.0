@@ -88,7 +88,7 @@ var controller = (function(dataCtrl, UICtrl) {
             var uri = dataCtrl.loopChars(psid).toLowerCase();
             window.location.replace(uri);
             }
-            */
+            
             var psid = sessionStorage.getItem('psid');
             
             if (psid !== null) {
@@ -99,7 +99,7 @@ var controller = (function(dataCtrl, UICtrl) {
                 
                 
             }
-            
+            */
             
             // 1. Load the names of all characters
             var names = dataCtrl.loadCharNames();
