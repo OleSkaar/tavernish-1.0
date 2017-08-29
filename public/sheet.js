@@ -92,7 +92,7 @@ var dataController = (function() {
         
         getURL: function() {
         
-            var path = window.location.pathname.split('/')[3].split('.')[0];
+            var path = window.location.pathname.split('/')[1].split('.')[0];
             console.log(path);
             
             return path;
@@ -347,7 +347,7 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
     
                 var text = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
                 console.log(text);
-                //share(text);
+                share(text);
  
                 
                 var btn = document.getElementById(DOM.result).getElementsByTagName('button')[0];
@@ -358,7 +358,7 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
             } else {
                 var text = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
                 console.log(text);
-                //share(text);
+                share(text);
             }
         }
     
