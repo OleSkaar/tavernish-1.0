@@ -254,7 +254,7 @@ var UIController = (function() {
                 return text + roll
             } else {
                 prev = UIController.readDice((prev/2));
-                roll = '(' + UIController.readDice(d1) + UIController.readDice(d2) + ' + ' + prev + prev + ')'
+                roll = ' (' + UIController.readDice(d1) + UIController.readDice(d2) + ' & ' + prev + prev + ')'
                 el.innerHTML = time + br + text + roll;
                 return text + roll
             }
