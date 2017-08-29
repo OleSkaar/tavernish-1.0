@@ -4,7 +4,7 @@
     <meta charset="UTF-8"> 
     <link rel="stylesheet" type="text/css" href="sheets.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <title>Tavernish Dice Roller</title>   
+    <title>Tavernish Dice Roller</title>
     </head>
 <body id="body">
     
@@ -17,14 +17,33 @@
   js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'Messenger'));
-</script>  
+</script>
     
 <script>
+var share;
   window.extAsyncInit = function() {
+      share =  function(message) {
+        MessengerExtensions.beginShareFlow(function success(response) {
+            if(response.is_sent === true){ 
+      	         // User shared. We're done here!
+      	         MessengerExtensions.requestCloseBrowser();
+            }
+            else {
+      	         // User canceled their share! 
+      
+            }
+        }, 
+        function error(errorCode, errorMessage) {      
+  	             // An error occurred trying to share!
+            },
+                                           
+        message,
+        "current_thread");
+      }
     console.log('the Messenger Extensions JS SDK is done loading'); 
   };
-</script>       
-    
+</script>    
+
 <script src="characters.js"></script>
 <script src="sheet.js"></script>
     
