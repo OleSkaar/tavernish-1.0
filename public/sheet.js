@@ -324,7 +324,7 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                     "elements":
                         [{
                         "title":"Result:",
-                        "text": text
+                        "subtitle": text
                         }]  
                     }
                 }
