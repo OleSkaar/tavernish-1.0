@@ -91,5 +91,23 @@ var characters = [
         {"average": []},
         {"fair": ["Slukke lys", "Mørkesyn"]}
     ]
+}, 
+    {
+    "id":"1562634000416129",
+    "firstName":"Jodr",
+    "middleName": "",
+    "lastName":"Godicek",
+    "rank": "Major",
+    "skills":[
+        { "average":["Årvåkenhet", "Intelligens", "Reaksjons", "Hardfør"]},
+        { "fair":["Strangulering", "Kastevåpen", "Flaks", "Styrke", "Nærkamp"]},
+        { "good":["Rifle", "Snike"]},
+        { "great":["Slange"]},
+        { "excellent":[]}
+    ],
+    "bioskills": [
+        {"average": ["Lokke (fugl)"]},
+        {"fair": ["Mane kråker"]}
+    ]
 }
     ];
