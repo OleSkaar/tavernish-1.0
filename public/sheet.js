@@ -317,12 +317,19 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
     
     var newMessage = function (text) {
             return {
-                "message":{
-                "text": text
+            "attachment":{
+                "type": "template",
+                "payload":{
+                    "template_type":"generic",
+                    "elements":
+                        [{
+                        "title":"Result:",
+                        "text": text
+                        }]  
+                    }
                 }
             }
-         };
-    
+        }
     
     var updateAfterRoll = function(lvl, text) {
         window.scroll(0,0);
@@ -356,6 +363,7 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                 var text = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
                 console.log(text);
                 var msg = newMessage(text);
+                console.log(msg);
                 share(msg);
  
                 
