@@ -22,13 +22,19 @@
 <script>
 var share;
   window.extAsyncInit = function() {
-     function newMessage (text) {
-            return {
-                "message":{
-                "text": text
-                }
-            };
+    function newMessage(text) {
+      return {
+      "attachment":{
+         "type":"template",
+         "payload":{
+             "template_type":"generic",
+             "elements": [{
+                 "title":"Result:",
+                 "text": text,
+             }]
          }
+      }
+    };
       share =  function(text) {
         MessengerExtensions.beginShareFlow(function success(response) {
             if(response.is_sent === true){ 
