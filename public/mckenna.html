@@ -22,21 +22,7 @@
 <script>
 var share;
   window.extAsyncInit = function() {
-    function newMessage(text) {
-      return {
-      "attachment":{
-         "type":"template",
-         "payload":{
-             "template_type":"generic",
-             "elements": [{
-                 "title":"Result:",
-                 "text": text,
-             }]
-         }
-      }
-    }
-    };
-      share =  function(text) {
+      share =  function(message) {
         MessengerExtensions.beginShareFlow(function success(response) {
             if(response.is_sent === true){ 
       	         // User shared. We're done here!
@@ -50,9 +36,11 @@ var share;
         function error(errorCode, errorMessage) {      
   	             // An error occurred trying to share!
             },
-        newMessage(text),
+                                           
+        message,
         "current_thread");
-    }
+    console.log(message)
+      }
     console.log('the Messenger Extensions JS SDK is done loading'); 
   };
 </script>    
