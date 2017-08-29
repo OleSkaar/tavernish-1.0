@@ -92,7 +92,7 @@ var dataController = (function() {
         
         getURL: function() {
         
-            var path = window.location.pathname.split('/')[1].split('.')[0];
+            var path = window.location.pathname.split('/')[3].split('.')[0];
             console.log(path);
             
             return path;
@@ -315,6 +315,7 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
         });
     };
     
+    
     var updateAfterRoll = function(lvl, text) {
         window.scroll(0,0);
         var roll, btn; 
@@ -346,21 +347,8 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
     
                 var text = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
                 console.log(text);
-                    MessengerExtensions.beginShareFlow(function success(response) {
-                        if(response.is_sent === true){ 
-      	                     // User shared. We're done here!
-      	                     MessengerExtensions.requestCloseBrowser();
-                            }
-                            else {
-      	                     // User canceled their share! 
-      
-                            }
-                        }, 
-                            function error(errorCode, errorMessage) {      
-  	                         // An error occurred trying to share!
-                                },
-                    text,
-                    "current_thread"); 
+                share(text);
+ 
                 
                 var btn = document.getElementById(DOM.result).getElementsByTagName('button')[0];
     
@@ -370,6 +358,7 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
             } else {
                 var text = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
                 console.log(text);
+                share(text);
             }
         }
     
@@ -401,8 +390,8 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
     
 })(dataController, UIController, logicController);
 
-controller.init();
 
+controller.init();
 
 
 

@@ -20,8 +20,26 @@
 </script>
     
 <script>
+ var share;
   window.extAsyncInit = function() {
-    console.log('the Messenger Extensions JS SDK is done loading'); 
+    console.log('the Messenger Extensions JS SDK is done loading');
+    share =  function(text) {                   
+        MessengerExtensions.beginShareFlow(function success(response) {
+            if(response.is_sent === true){ 
+      	         // User shared. We're done here!
+      	         MessengerExtensions.requestCloseBrowser();
+            }
+            else {
+      	         // User canceled their share! 
+      
+            }
+        }, 
+        function error(errorCode, errorMessage) {      
+  	             // An error occurred trying to share!
+            },
+        text,
+        "current_thread");
+    }
   };
 </script>    
 
