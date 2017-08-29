@@ -92,7 +92,7 @@ var dataController = (function() {
         
         getURL: function() {
         
-            var path = window.location.pathname.split('/')[1].split('.')[0];
+            var path = window.location.pathname.split('/')[3].split('.')[0];
             console.log(path);
             
             return path;
@@ -211,7 +211,7 @@ var UIController = (function() {
         },
         
         skillRead: function (n, t, d1, d2, prev) {
-            var lvl, el, text;
+            var lvl, el, text, time, br;
             el = document.getElementById(DOMstrings.roll);
             
             
@@ -240,16 +240,19 @@ var UIController = (function() {
             } else {
                 return n + ' ' + t + ' is not a valid dice roll';
             }  
-            
-            text = UIController.time() + ' | ' + name + ' fikk ' + lvl + ' i ' + t;
+            time = UIController.time() + ' | '
+            br = '</br> '
+            text =  name + ' fikk ' + lvl + ' i ' + t;
             
             if (prev === 0 || prev === undefined) {
-                text = text + '</br> (' + UIController.readDice(d1) + UIController.readDice(d2) + ')';
-                el.innerHTML = text;
+                roll = ' (' + UIController.readDice(d1) + UIController.readDice(d2) + ')';
+                el.innerHTML = time + br + text + roll;
+                return text + roll
             } else {
                 prev = UIController.readDice((prev/2));
-                text = text + '</br> (' + UIController.readDice(d1) + UIController.readDice(d2) + ' + ' + prev + prev + ')'
-                el.innerHTML = text;
+                roll = '(' + UIController.readDice(d1) + UIController.readDice(d2) + ' + ' + prev + prev + ')'
+                el.innerHTML = time + br + text + roll;
+                return text + roll
             }
             
             
@@ -341,7 +344,23 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                 
                 // 2b. If not, remove double roll button, and turn on event listeners again
     
-                UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
+                var text = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
+                console.log(text);
+                    MessengerExtensions.beginShareFlow(function success(response) {
+                        if(response.is_sent === true){ 
+      	                     // User shared. We're done here!
+      	                     MessengerExtensions.requestCloseBrowser();
+                            }
+                            else {
+      	                     // User canceled their share! 
+      
+                            }
+                        }, 
+                            function error(errorCode, errorMessage) {      
+  	                         // An error occurred trying to share!
+                                },
+                    text,
+                    "current_thread"); 
                 
                 var btn = document.getElementById(DOM.result).getElementsByTagName('button')[0];
     
@@ -349,7 +368,8 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                     toggleButtons();
                 
             } else {
-                UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
+                var text = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
+                console.log(text);
             }
         }
     

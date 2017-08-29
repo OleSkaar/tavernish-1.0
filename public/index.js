@@ -80,27 +80,6 @@ var controller = (function(dataCtrl, UICtrl) {
         init: function() {
             console.log('Application has started.');
             
-            //0. Check if a messenger page-scoped ID is available. 
-            // If it is, search for a match in characters.js and load the right page
-            /*
-            if (sessionStorage.psid !== undefined) {
-            var psid = sessionStorage.psid.toString();
-            var uri = dataCtrl.loopChars(psid).toLowerCase();
-            window.location.replace(uri);
-            }
-            
-            var psid = sessionStorage.getItem('psid');
-            
-            if (psid !== null) {
-                
-                document.getElementById('result').innerHTML = psid;
-                var uri = dataCtrl.loopChars(psid).toLowerCase();
-                window.location.replace(uri + '.html');
-                
-                
-            }
-            */
-            
             // 1. Load the names of all characters
             var names = dataCtrl.loadCharNames();
             
