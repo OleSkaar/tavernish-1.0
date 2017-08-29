@@ -92,7 +92,7 @@ var dataController = (function() {
         
         getURL: function() {
         
-            var path = window.location.pathname.split('/')[3].split('.')[0];
+            var path = window.location.pathname.split('/')[1].split('.')[0];
             console.log(path);
             
             return path;
