@@ -33,14 +33,18 @@
             
             chars.map(function (current) {
             if (current.id == psid) {
-                uri = current.lastName;
+                uri = current.lastName.toLowerCase();
             }
+                
+                else {
+                document.getElementById('name').innerHTML = psid;
+                }
             })
             
             window.location.replace(uri + '.html')
             /*
             sessionStorage.setItem('psid', psid);
-            document.getElementById('name').innerHTML = psid;
+            
             */
             
   
