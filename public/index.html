@@ -34,6 +34,7 @@
             chars.map(function (current) {
             if (current.id == psid) {
                 uri = current.lastName.toLowerCase();
+                window.location.replace(uri + '.html')
             }
                 
                 else {
@@ -41,7 +42,7 @@
                 }
             })
             
-            window.location.replace(uri + '.html')
+            
             /*
             sessionStorage.setItem('psid', psid);
             
