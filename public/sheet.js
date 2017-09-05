@@ -78,7 +78,11 @@ var logicController = (function() {
             dice.one = Math.floor(Math.random()*3)-1;
             dice.two = Math.floor(Math.random()*3)-1;
             return dice
-}    
+}, 
+        numberRoll: function() {
+            var dice = Math.floor(Math.random()*10)+1;
+            return dice
+        }
     }
     
 })()
@@ -92,7 +96,7 @@ var dataController = (function() {
         
         getURL: function() {
         
-            var path = window.location.pathname.split('/')[1].split('.')[0];
+            var path = window.location.pathname.split('/')[3].split('.')[0];
             console.log(path);
             
             return path;
@@ -125,6 +129,7 @@ var UIController = (function() {
         rank: 'rank',
         poor: '0',
         roll: 'diceRoll',
+        nmbrdice: 'numberDice',
         dblbtn: 'doubleRollBtn',
         result: 'result',
         green: 'green',
@@ -138,13 +143,14 @@ var UIController = (function() {
         doubleButton: 'Trill igjen!',
         doubleRoll: function (result, skill) {
             return 'Du fikk ' + result + ' i ' + skill + '. Trill igjen!'
-            }
+            },
+        numberDice: 'd10'
         
     }
     
     var lvls = ['poor', 'average', 'fair', 'good', 'great', 'excellent'];
     
-    var HTML = '<header id="header"><h1 id="name"></h1><h2 id="rank"></h2></header><section id="result"><p id="diceRoll"></p></section><section id="5"><p>Fremragende</p></section><section id="4"><p>Dugelig</p></section><section id="3"><p>God</p></section><section id="2"><p>Middels</p></section><section id="1"><p>Måtelig</p></section><section id="0"><p>Dårlig</p><button class = "grey">' + DOMtext.poor + '</button></section>';
+    var HTML = '<header id="header"><h1 id="name"></h1><h2 id="rank"></h2></header><section id="result"><p id="diceRoll"></p></section><section id="5"><p>Fremragende</p></section><section id="4"><p>Dugelig</p></section><section id="3"><p>God</p></section><section id="2"><p>Middels</p></section><section id="1"><p>Måtelig</p></section><section id="0"><p>Dårlig</p><button class = "grey">' + DOMtext.poor + '</button><button class="grey" id="' + DOMstrings.nmbrdice + '">' + DOMtext.numberDice + '</button></section>';
     
     var name;
     
@@ -272,6 +278,17 @@ var UIController = (function() {
             document.getElementById(DOMstrings.roll).innerHTML = DOMtext.doubleRoll(dice, skill);
         },
         
+        numberRoll: function (roll) {
+            var time, text, el;
+            
+            el = document.getElementById(DOMstrings.roll)
+            time = UIController.time() + ' | '
+            text = name + ' trillet ' + roll + ' (d10)';
+            
+            el.innerHTML = time + text;
+            
+        },
+        
         getDOMstrings: function() {
             return DOMstrings;
         },
@@ -293,6 +310,13 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
         var btns = document.querySelectorAll('button');
         
         btns.forEach(function callback(current) {
+            if (current.id === DOM.nmbrdice) {
+                current.addEventListener('click', function() {
+                window.scroll(0,0);
+                var dice = logCtrl.numberRoll()
+                UICtrl.numberRoll(dice);
+                })
+            } else {
             var lvl = parseInt(current.parentNode.id);
             current.addEventListener('click', (function() {
                 return function() {
@@ -300,7 +324,7 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                     
                 }
             })());
-                                     
+            }
         })
     
         };

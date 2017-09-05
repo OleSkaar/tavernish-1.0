@@ -69,7 +69,7 @@ var characters = [
         { "excellent":[]}
     ],
     "bioskills": [
-        {"average": ["Øgleledd/Blodøye", "Whisky"]},
+        {"average": ["Øgleledd/Blodøye"]},
         {"fair": ["Clawcontrol"]}
     ]
 },
