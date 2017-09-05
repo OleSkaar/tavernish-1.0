@@ -287,6 +287,8 @@ var UIController = (function() {
             
             el.innerHTML = time + text;
             
+            return time + text
+            
         },
         
         getDOMstrings: function() {
@@ -314,7 +316,9 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                 current.addEventListener('click', function() {
                 window.scroll(0,0);
                 var dice = logCtrl.numberRoll()
-                UICtrl.numberRoll(dice);
+                var text = UICtrl.numberRoll(dice);
+                var msg = newMessage(text);
+                share(msg);
                 })
             } else {
             var lvl = parseInt(current.parentNode.id);
