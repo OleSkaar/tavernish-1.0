@@ -113,6 +113,16 @@ var dataController = (function() {
             }
         
             return char;    
+        },
+        
+        postToServer: function(data) {
+            var http = new XMLHttpRequest();
+            var url = '/log';
+            
+            http.open('POST', url);
+            http.setRequestHeader("Content-Type", "application/json");
+            http.send(JSON.stringify(data));
+            
         }
         
     }
@@ -395,8 +405,9 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                 var text = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
                 console.log(text);
                 var msg = newMessage(text);
-                console.log(msg);
-                share(msg);
+                console.log(msg)
+                dataCtrl.postToServer({result: text})
+                share(msg)
  
                 
                 var btn = document.getElementById(DOM.result).getElementsByTagName('button')[0];
@@ -408,7 +419,8 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                 var text = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
                 console.log(text);
                 var msg = newMessage(text);
-                share(msg);
+                dataCtrl.postToServer({result: text})
+                share(msg)
             }
         }
     
