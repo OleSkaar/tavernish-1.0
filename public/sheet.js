@@ -287,7 +287,7 @@ var UIController = (function() {
             
             el.innerHTML = time + text;
             
-            return time + text
+            return text
             
         },
         
