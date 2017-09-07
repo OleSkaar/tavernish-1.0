@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
+const fs = require('fs');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -47,6 +48,16 @@ app.post('/webhook', (req, res) => {
     });
     res.status(200).end();
   }
+});
+
+app.post('/log', (req, res) => {
+    var file, logObj, data;
+    file = fs.readFileSync('./public/log.json');
+    logObj = JSON.parse(file)
+    logObj.push(req.body);
+    data = JSON.stringify(logObj, null, 2);
+    fs.writeFileSync('./public/log.json', data);
+    res.status(200).end();
 });
 
 function sendMessage(event, r) {

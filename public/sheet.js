@@ -403,21 +403,16 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                 // 2b. If not, remove double roll button, and turn on event listeners again
     
                 var text = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
-                console.log(text);
                 var msg = newMessage(text);
-                console.log(msg)
                 dataCtrl.postToServer({result: text})
                 share(msg)
- 
                 
                 var btn = document.getElementById(DOM.result).getElementsByTagName('button')[0];
-    
-                    btn.parentNode.removeChild(btn);
-                    toggleButtons();
+                btn.parentNode.removeChild(btn);
+                toggleButtons();
                 
             } else {
                 var text = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
-                console.log(text);
                 var msg = newMessage(text);
                 dataCtrl.postToServer({result: text})
                 share(msg)
