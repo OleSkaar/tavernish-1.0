@@ -1,5 +1,5 @@
 /node_modules
-/public/log.json
+public/log.json
 npm-debug.log
 .DS_Store
 /*.env
