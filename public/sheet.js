@@ -231,7 +231,7 @@ var UIController = (function() {
         },
         
         skillRead: function (n, t, d1, d2, prev) {
-            var lvl, el, text, time, br;
+            var lvl, el, text, time, br, exports;
             el = document.getElementById(DOMstrings.roll);
             
             
@@ -259,20 +259,30 @@ var UIController = (function() {
                 lvl = 'tok en Andersen';
             } else {
                 return n + ' ' + t + ' is not a valid dice roll';
-            }  
-            time = UIController.time() + ' | '
+            }
+            
+            exports = {
+                name: name,
+                date: UIController.time().date,
+                time: UIController.time().clock + ' | ',
+                text: name + ' fikk ' + lvl + ' i ' + t,
+                roll: '' 
+            }
+            
             br = '</br> '
-            text =  name + ' fikk ' + lvl + ' i ' + t;
+            
             
             if (prev === 0 || prev === undefined) {
-                roll = ' (' + UIController.readDice(d1) + UIController.readDice(d2) + ')';
-                el.innerHTML = time + br + text + roll;
-                return text + roll
+                exports.roll = ' (' + UIController.readDice(d1) + UIController.readDice(d2) + ')';
+                
+                el.innerHTML = exports.time + br + exports.text + exports.roll;
+                return exports
             } else {
                 prev = UIController.readDice((prev/2));
-                roll = ' (' + UIController.readDice(d1) + UIController.readDice(d2) + ' & ' + prev + prev + ')'
-                el.innerHTML = time + br + text + roll;
-                return text + roll
+                exports.roll = ' (' + UIController.readDice(d1) + UIController.readDice(d2) + ' & ' + prev + prev + ')'
+                
+                el.innerHTML = exports.time + br + exports.text + exports.roll;
+                return exports
             }
             
             
@@ -280,7 +290,12 @@ var UIController = (function() {
         
         time: function() {
             var d = new Date();
-            return d.getHours() + ':' + (d.getMinutes()<10?'0':'') + d.getMinutes();
+            var time = {
+                date: d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear(),
+                clock: d.getHours() + ':' + (d.getMinutes()<10?'0':'') + d.getMinutes()
+            }
+            
+            return time;
         },
         
         doubleRollText: function(d1, d2, skill) {
@@ -379,6 +394,9 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
         
         // 1. Skill roll
             roll = logCtrl.skillRoll(lvl, text);
+        
+        
+            var result = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
             
         // 2. Check if double roll button should be displayed
             if (roll.doubleRoll === true) {
@@ -402,7 +420,6 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                 
                 // 2b. If not, remove double roll button, and turn on event listeners again
     
-                var text = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
                 var msg = newMessage(text);
                 dataCtrl.postToServer({result: text})
                 share(msg)
@@ -412,7 +429,6 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                 toggleButtons();
                 
             } else {
-                var text = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
                 var msg = newMessage(text);
                 dataCtrl.postToServer({result: text})
                 share(msg)
