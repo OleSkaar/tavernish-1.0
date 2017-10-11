@@ -80,7 +80,9 @@ var logicController = (function() {
             return dice
 }, 
         numberRoll: function() {
-            var dice = Math.floor(Math.random()*10)+1;
+            var dice = {
+                result: Math.floor(Math.random()*10)+1
+            }
             return dice
         }
     }
@@ -234,64 +236,75 @@ var UIController = (function() {
             var lvl, el, text, time, br, exports;
             el = document.getElementById(DOMstrings.roll);
             
-            
-            if (n >= 6) {
-                lvl = 'gudommelig';
-            } else if (n === 5) {
-                lvl = 'fremragende';
-            } else if (n === 4) {
-                lvl =  'dugelig';
-            } else if (n === 3) {
-                lvl = 'god';
-            } else if (n === 2) {
-                lvl = 'middels';
-            } else if (n === 1) {
-                lvl = 'måtelig';
-            } else if (n === 0) {
-                lvl = 'dårlig';
-            } else if (n === -1) {
-                lvl = 'elendig';
-            } else if (n === -2) {
-                lvl = 'ynkelig';
-            } else if (n === -3) {
-                lvl = 'nei';
-            } else if (n <= -4) {
-                lvl = 'tok en Andersen';
-            } else {
-                return n + ' ' + t + ' is not a valid dice roll';
-            }
+            br = '</br> '
+            time = UIController.time();
             
             exports = {
                 name: name,
-                date: UIController.time().date,
-                time: UIController.time().clock + ' | ',
-                text: name + ' fikk ' + lvl + ' i ' + t,
+                date: time.date,
+                month: time.month,
+                year: time.year,
+                clock: time.clock,
+                text: '',
                 roll: '' 
             }
             
-            br = '</br> '
+            if (t !== DOMtext.numberDice) {
             
-            
-            if (prev === 0 || prev === undefined) {
-                exports.roll = ' (' + UIController.readDice(d1) + UIController.readDice(d2) + ')';
+                if (n >= 6) {
+                    lvl = 'gudommelig';
+                } else if (n === 5) {
+                    lvl = 'fremragende';
+                } else if (n === 4) {
+                    lvl =  'dugelig';
+                } else if (n === 3) {
+                    lvl = 'god';
+                } else if (n === 2) {
+                    lvl = 'middels';
+                } else if (n === 1) {
+                    lvl = 'måtelig';
+                } else if (n === 0) {
+                    lvl = 'dårlig';
+                } else if (n === -1) {
+                    lvl = 'elendig';
+                } else if (n === -2) {
+                    lvl = 'ynkelig';
+                } else if (n === -3) {
+                    lvl = 'nei';
+                } else if (n <= -4) {
+                    lvl = 'tok en Andersen';
+                } else {
+                    return n + ' ' + t + ' is not a valid dice roll';
+                }
                 
-                el.innerHTML = exports.time + br + exports.text + exports.roll;
-                return exports
+                if (prev === 0 || prev === undefined) {
+                    exports.roll = ' (' + UIController.readDice(d1) + UIController.readDice(d2) + ')';
+
+                } else {
+                    prev = UIController.readDice((prev/2));
+                    exports.roll = ' (' + UIController.readDice(d1) + UIController.readDice(d2) + ' & ' + prev + prev + ')'
+                }
+                
+                exports.text = name + ' fikk ' + lvl + ' i ' + t;
+                text = exports.clock + ' | ' + br + exports.text + exports.roll;
+                
             } else {
-                prev = UIController.readDice((prev/2));
-                exports.roll = ' (' + UIController.readDice(d1) + UIController.readDice(d2) + ' & ' + prev + prev + ')'
+                // If number roll:
                 
-                el.innerHTML = exports.time + br + exports.text + exports.roll;
-                return exports
+                exports.text = name + ' trillet ' + n + ' (d10)';
+                text = exports.clock + ' | ' + br + exports.text;
             }
-            
-            
+
+            el.innerHTML = text;
+            return exports
         },
         
         time: function() {
             var d = new Date();
             var time = {
-                date: d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear(),
+                date: d.getDate(),
+                month: d.getMonth() + 1,
+                year: d.getFullYear(),
                 clock: d.getHours() + ':' + (d.getMinutes()<10?'0':'') + d.getMinutes()
             }
             
@@ -301,19 +314,6 @@ var UIController = (function() {
         doubleRollText: function(d1, d2, skill) {
             var dice = UIController.readDice(d1) + UIController.readDice(d2);
             document.getElementById(DOMstrings.roll).innerHTML = DOMtext.doubleRoll(dice, skill);
-        },
-        
-        numberRoll: function (roll) {
-            var time, text, el;
-            
-            el = document.getElementById(DOMstrings.roll)
-            time = UIController.time() + ' | '
-            text = name + ' trillet ' + roll + ' (d10)';
-            
-            el.innerHTML = time + text;
-            
-            return text
-            
         },
         
         getDOMstrings: function() {
@@ -337,15 +337,6 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
         var btns = document.querySelectorAll('button');
         
         btns.forEach(function callback(current) {
-            if (current.id === DOM.nmbrdice) {
-                current.addEventListener('click', function() {
-                window.scroll(0,0);
-                var dice = logCtrl.numberRoll()
-                var text = UICtrl.numberRoll(dice);
-                var msg = newMessage(text);
-                share(msg);
-                })
-            } else {
             var lvl = parseInt(current.parentNode.id);
             current.addEventListener('click', (function() {
                 return function() {
@@ -353,9 +344,7 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                     
                 }
             })());
-            }
         })
-    
         };
     
     var toggleButtons = function() {
@@ -392,9 +381,17 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
         window.scroll(0,0);
         var roll, btn; 
         
-        // 1. Skill roll
-            roll = logCtrl.skillRoll(lvl, text);
         
+        // 1. Skill roll
+            if (text !== DOMtext.numberDice) {
+                console.log('Not a number dice');
+                
+                roll = logCtrl.skillRoll(lvl, text);
+                
+            } else if (text === DOMtext.numberDice) {
+                console.log('Number dice');
+                roll = logCtrl.numberRoll();
+            }
         
             var result = UICtrl.skillRead((roll.result + lvl), text, roll.d1, roll.d2, roll.prev);
             
@@ -420,8 +417,8 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                 
                 // 2b. If not, remove double roll button, and turn on event listeners again
     
-                var msg = newMessage(text);
-                dataCtrl.postToServer({result: text})
+                var msg = newMessage(result.text);
+                dataCtrl.postToServer(result)
                 share(msg)
                 
                 var btn = document.getElementById(DOM.result).getElementsByTagName('button')[0];
@@ -429,8 +426,8 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                 toggleButtons();
                 
             } else {
-                var msg = newMessage(text);
-                dataCtrl.postToServer({result: text})
+                var msg = newMessage(result.text);
+                dataCtrl.postToServer(result)
                 share(msg)
             }
         }
