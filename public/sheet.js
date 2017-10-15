@@ -165,7 +165,6 @@ var UIController = (function() {
     var HTML = '<header id="header"><h1 id="name"></h1><h2 id="rank"></h2></header><section id="result"><p id="diceRoll"></p></section><section id="5"><p>Fremragende</p></section><section id="4"><p>Dugelig</p></section><section id="3"><p>God</p></section><section id="2"><p>Middels</p></section><section id="1"><p>Måtelig</p></section><section id="0"><p>Dårlig</p><button class = "grey">' + DOMtext.poor + '</button><button class="grey" id="' + DOMstrings.nmbrdice + '">' + DOMtext.numberDice + '</button></section>';
     
     var name;
-    
 
     return {
         
@@ -288,7 +287,6 @@ var UIController = (function() {
                 
             } else {
                 // If number roll:
-                
                 exports.text = name + ' trillet ' + n + ' (d10)';
                 text = time.clock + ' | ' + br + exports.text;
             }
@@ -458,7 +456,3 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
 
 
 controller.init();
-
-
-
-    
