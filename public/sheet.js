@@ -233,18 +233,16 @@ var UIController = (function() {
         },
         
         skillRead: function (n, t, d1, d2, prev) {
-            var lvl, el, text, time, br, exports;
+            var lvl, el, text, time, br, exports, d;
             el = document.getElementById(DOMstrings.roll);
             
             br = '</br> '
+            d = '-'
             time = UIController.time();
             
             exports = {
                 name: name,
-                date: time.date,
-                month: time.month,
-                year: time.year,
-                clock: time.clock,
+                timestamp: time.year + d + time.month + d + time.date + d + time.clock + ':' + time.seconds,
                 text: '',
                 roll: '' 
             }
@@ -286,13 +284,13 @@ var UIController = (function() {
                 }
                 
                 exports.text = name + ' fikk ' + lvl + ' i ' + t;
-                text = exports.clock + ' | ' + br + exports.text + exports.roll;
+                text = time.clock + ' | ' + br + exports.text + exports.roll;
                 
             } else {
                 // If number roll:
                 
                 exports.text = name + ' trillet ' + n + ' (d10)';
-                text = exports.clock + ' | ' + br + exports.text;
+                text = time.clock + ' | ' + br + exports.text;
             }
 
             el.innerHTML = text;
@@ -305,7 +303,8 @@ var UIController = (function() {
                 date: d.getDate(),
                 month: d.getMonth() + 1,
                 year: d.getFullYear(),
-                clock: d.getHours() + ':' + (d.getMinutes()<10?'0':'') + d.getMinutes()
+                clock: d.getHours() + ':' + (d.getMinutes()<10?'0':'') + d.getMinutes(),
+                seconds: d.getSeconds()
             }
             
             return time;
@@ -383,13 +382,10 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
         
         
         // 1. Skill roll
-            if (text !== DOMtext.numberDice) {
-                console.log('Not a number dice');
-                
+            if (text !== DOMtext.numberDice) { 
                 roll = logCtrl.skillRoll(lvl, text);
                 
             } else if (text === DOMtext.numberDice) {
-                console.log('Number dice');
                 roll = logCtrl.numberRoll();
             }
         
