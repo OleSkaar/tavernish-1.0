@@ -9,19 +9,35 @@ var dataController = (function() {
     
     return {
         
-        getJSON: function() {
+        getJSON: function(callback) {
+        
             var url, req, res;
             url = '/log.json'
             req = new XMLHttpRequest();
-            req.open('GET', url);
+ 
             req.responseType = 'json';
-            req.send();
             req.onload = function() {
-                res = req.response    
+                callback(req.response);
             }
-            return res
+            
+            req.open('GET', url, true);
+            req.send();   
+            
+            
+        },
+        
+        getFirstEntries: function(array) {
+            
+            var firstentries = [];
+            
+            /*for (i = 0, i < 50, i++) {
+                firstentries.push(array[y])
+            }
+        */
+            return firstentries
         }
         
+                
     }
     
 })();
@@ -44,8 +60,17 @@ var controller = (function(dataCtrl, UICtrl) {
             console.log('Log page loaded.');
             
             // 1. Load the JSON file
-            var file = dataCtrl.getJSON()
-            console.log(file);
+            var file;
+            dataCtrl.getJSON(function(response) {
+                var section = document.getElementById('log');
+                section.innerHTML = (response);
+                
+            //2. Get the 50 first entries
+            var entries = dataCtrl.getFirstEntries(response);
+            
+            //3. Fill in the table    
+                
+            });
             
 
         }
@@ -54,4 +79,4 @@ var controller = (function(dataCtrl, UICtrl) {
     
 })(dataController, UIController);
 
-
+controller.init();

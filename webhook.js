@@ -57,7 +57,7 @@ app.post('/log', (req, res) => {
     logObj.push(req.body);
     data = JSON.stringify(logObj, null, 2);
     fs.writeFileSync('./public/log.json', data);
-    res.status(200).end();
+    res.status(200).end();  
 });
 
 function sendMessage(event, r) {
