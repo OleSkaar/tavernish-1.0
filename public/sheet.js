@@ -237,11 +237,12 @@ var UIController = (function() {
             
             br = '</br> '
             d = '-'
+            s = ' '
             time = UIController.time();
             
             exports = {
                 name: name,
-                timestamp: time.year + d + time.month + d + time.date + d + time.clock + ':' + time.seconds,
+                timestamp: time.year + d + time.month + d + time.date + s + time.clock + ':' + time.seconds,
                 text: '',
                 roll: '' 
             }

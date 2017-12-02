@@ -105,6 +105,32 @@ p {
     font-size: 14px;
 }
 
+#logtable {
+    font-size: 14px;
+    width: 100%;
+    max-width: 1440px;
+    
+    
+}
+
+tr:nth-child(odd) {
+    background: #CCC
+}
+
+td {
+    padding: 5px;
+    text-align: center;
+    min-width: 40px;
+}
+
+.20w {
+    width: 20%;
+}
+
+.60w {
+   width: 60% 
+}
+
 #diceRoll {
     font-size: 15px;
     line-height: 1.25em;

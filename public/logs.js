@@ -30,10 +30,10 @@ var dataController = (function() {
             
             var firstentries = [];
             
-            /*for (i = 0, i < 50, i++) {
-                firstentries.push(array[y])
+            for (i = 0; i < 50; i++) {
+                firstentries.push(array[i])
             }
-        */
+        
             return firstentries
         }
         
@@ -50,6 +50,14 @@ var UIController = (function() {
         log: 'log',
     }
     
+    return {
+        
+        loopTable: function(table) {
+            
+            table.forEach
+        }
+    }
+    
 })();
 
 // GLOBAL CONTROLLER
@@ -60,15 +68,16 @@ var controller = (function(dataCtrl, UICtrl) {
             console.log('Log page loaded.');
             
             // 1. Load the JSON file
-            var file;
             dataCtrl.getJSON(function(response) {
-                var section = document.getElementById('log');
-                section.innerHTML = (response);
                 
             //2. Get the 50 first entries
             var entries = dataCtrl.getFirstEntries(response);
             
             //3. Fill in the table    
+            var section = document.getElementById('logtable'); 
+                
+                
+                
                 
             });
             
