@@ -28,6 +28,7 @@ var dataController = (function() {
         
         getFirstEntries: function(array) {
             
+            array.reverse();
             var firstentries = [];
             
             for (i = 0; i < 50; i++) {
@@ -35,9 +36,7 @@ var dataController = (function() {
             }
         
             return firstentries
-        }
-        
-                
+        }            
     }
     
 })();
@@ -48,13 +47,21 @@ var UIController = (function() {
     
     var DOMstrings = {
         log: 'log',
+        table: 'logtable'
     }
     
     return {
         
-        loopTable: function(table) {
+        fillTable: function(entries) {
             
-            table.forEach
+            var table = document.getElementById(DOMstrings.table);
+            table = table.childNodes[1].children;
+            
+            for (i = 0; i < table.length; i++) {
+                table[i].children[0].innerHTML = entries[i].name
+                table[i].children[1].innerHTML = entries[i].timestamp
+                table[i].children[2].innerHTML = entries[i].text + entries[i].roll
+            }
         }
     }
     
@@ -74,10 +81,8 @@ var controller = (function(dataCtrl, UICtrl) {
             var entries = dataCtrl.getFirstEntries(response);
             
             //3. Fill in the table    
-            var section = document.getElementById('logtable'); 
-                
-                
-                
+            UICtrl.fillTable(entries);
+            
                 
             });
             
