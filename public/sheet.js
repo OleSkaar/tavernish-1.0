@@ -139,10 +139,10 @@ var UIController = (function() {
     }
     
     var DOMtext = {
-        poor: 'General',
-        doubleButton: 'Roll again',
+        poor: 'Generell',
+        doubleButton: 'Trill igjen',
         doubleRoll: function (result, skill) {
-            return 'You rolled ' + result + ' i ' + skill + '. Roll again!'
+            return 'Du trillet ' + result + ' i ' + skill + '. Trill igjen!'
             },
         numberDice: 'd10'
         
