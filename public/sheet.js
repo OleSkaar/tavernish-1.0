@@ -139,10 +139,10 @@ var UIController = (function() {
     }
     
     var DOMtext = {
-        poor: 'Generell',
-        doubleButton: 'Trill igjen!',
+        poor: 'General',
+        doubleButton: 'Roll again',
         doubleRoll: function (result, skill) {
-            return 'Du fikk ' + result + ' i ' + skill + '. Trill igjen!'
+            return 'You rolled ' + result + ' i ' + skill + '. Roll again!'
             },
         numberDice: 'd10'
         
@@ -283,7 +283,7 @@ var UIController = (function() {
             
             el = document.getElementById(DOMstrings.roll)
             time = UIController.time() + ' | '
-            text = name + ' trillet ' + roll + ' (d10)';
+            text = name + ' rolled ' + roll + ' (d10)';
             
             el.innerHTML = time + text;
             
