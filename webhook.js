@@ -27,12 +27,8 @@ app.use(express.static('public', {'extensions': ['html']}))
 
 
 app.get("/discord-webhook", (req, res) => {
-    var message = {
-        title: "Tittel",
-        content: "Innhold"
-    }
     res.status(200).send("Status 200 sent")
-    sendDiscordMessage(message)
+    sendDiscordMessage(req.body)
 });
 
 
@@ -119,6 +115,6 @@ function sendDiscordMessage(message) {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({"username": "Tavernish", "content": `New blog post 👉 [${message.title}](${message.content})`})
+        body: JSON.stringify({"username": "Tavernish", "content": `👉 [${message}]`})
     });
 }

@@ -337,7 +337,6 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
     function sendDiscordWebhook(message) {
         var request = new XMLHttpRequest(); // create an xmlhttp object
         request.open("GET", "/discord-webhook"); // means GET stuff in there
-        request.link = link;
 
         // wait for the response
         request.addEventListener("readystatechange", function() {
