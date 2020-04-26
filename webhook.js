@@ -1,10 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
+const fetch = require('node-fetch');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 var x, y;
+
+const discordWebhookUrl = "https://discordapp.com/api/webhooks/703977756945285160/fwjGm7Ui0Mt-lyXGujlgB_mvJ8uS_22Ov7elBd_cHMnEf0tkNXm4ewJ-QkiYtOu1NQ80";
+
 
 const server = app.listen(process.env.PORT || 5000, () => {
   console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
@@ -20,6 +24,16 @@ app.use(function(req, res, next) {
 
 
 app.use(express.static('public', {'extensions': ['html']}))
+
+
+app.get("/discord-webhook", (req, res) => {
+    var message = {
+        title: "Tittel",
+        content: "Innhold"
+    }
+    res.status(200).send("Status 200 sent")
+    sendDiscordMessage(message)
+});
 
 
 /* For Facebook Validation */
@@ -49,35 +63,37 @@ app.post('/webhook', (req, res) => {
   }
 });
 
+
+
 function sendMessage(event, r) {
-  let sender = event.sender.id;
-if (event.message) { 
-    let text = event.message.text;
-}
-var msg;
-    
-if (r === 1) {
-    roll();
-    msg = 'You rolled: ' + readDice(x) + readDice(y);
-} else {
-    msg = 'Welcome! Type anything to roll dice.';
-}
-    
-      request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token: 'EAAYJX5ZAqnfsBADSDZA3SpOvoOafZBGKN1QZCPKMWhDEvq3ZA4Ld5FpKVM307BsLxxkkXkE99s7oe9SlLo89S6P96BSHYzsyUKOFY95Ag6tkMo4YXX3zZCsJlSqMtW21vpcy1wZC7drW6PqmIJ5PwRZBSSLpTZCFxx8N1SWYrVAzZBDwZDZD'},
-    method: 'POST',
-    json: {
-      recipient: {id: sender},
-      message: {text: msg}
+    let sender = event.sender.id;
+    if (event.message) { 
+        let text = event.message.text;
     }
-  }, function (error, response) {
-    if (error) {
-        console.log('Error sending message: ', error);
-    } else if (response.body.error) {
-        console.log('Error: ', response.body.error);
+    var msg;
+
+    if (r === 1) {
+        roll();
+        msg = 'You rolled: ' + readDice(x) + readDice(y);
+    } else {
+        msg = 'Welcome! Type anything to roll dice.';
     }
-  });
+
+          request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token: 'EAAYJX5ZAqnfsBADSDZA3SpOvoOafZBGKN1QZCPKMWhDEvq3ZA4Ld5FpKVM307BsLxxkkXkE99s7oe9SlLo89S6P96BSHYzsyUKOFY95Ag6tkMo4YXX3zZCsJlSqMtW21vpcy1wZC7drW6PqmIJ5PwRZBSSLpTZCFxx8N1SWYrVAzZBDwZDZD'},
+        method: 'POST',
+        json: {
+          recipient: {id: sender},
+          message: {text: msg}
+        }
+      }, function (error, response) {
+        if (error) {
+            console.log('Error sending message: ', error);
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error);
+        }
+      });
 }
 
 function readDice(d) {
@@ -95,3 +111,14 @@ function roll() {
     y = Math.floor(Math.random()*3)-1;
 }
 
+
+
+function sendDiscordMessage(message) {
+   fetch(discordWebhookUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({"username": "Tavernish", "content": `New blog post 👉 [${message.title}](${message.content})`})
+    });
+}

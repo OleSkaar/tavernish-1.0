@@ -319,6 +319,7 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                 var text = UICtrl.numberRoll(dice);
                 var msg = newMessage(text);
                 share(msg);
+                sendDiscordWebhook(text)
                 })
             } else {
             var lvl = parseInt(current.parentNode.id);
@@ -333,6 +334,24 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
     
         };
     
+    function sendDiscordWebhook(message) {
+        var request = new XMLHttpRequest(); // create an xmlhttp object
+        request.open("GET", "/discord-webhook"); // means GET stuff in there
+        request.link = link;
+
+        // wait for the response
+        request.addEventListener("readystatechange", function() {
+           // checks if we are ready to read response
+           if (this.readyState === 4 && this.status === 200) {
+                // do something with response
+               console.log("GET request received by  Discord.");
+            }
+
+    })       
+
+        //send request
+        request.send(message); 
+    }
     var toggleButtons = function() {
         
         var btns = document.querySelectorAll('button');
@@ -396,7 +415,8 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                 console.log(text);
                 var msg = newMessage(text);
                 console.log(msg);
-                share(msg);
+                share(msg)
+                sendDiscordWebhook(text);
  
                 
                 var btn = document.getElementById(DOM.result).getElementsByTagName('button')[0];
@@ -409,6 +429,7 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                 console.log(text);
                 var msg = newMessage(text);
                 share(msg);
+                sendDiscordWebhook(text);
             }
         }
     
