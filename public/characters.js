@@ -46,7 +46,7 @@ var characters = [
     "skills":[
         { "poor":[]},
         { "average":["Sterk", "Aktrobatikk", "Observasjon", "Kamuflasje", "Overlevelse"]},
-        { "fair":["Reaksjon", "Atletisk", "Indiander (Apache)"] },
+        { "fair":["Reaksjon", "Atletisk", "Indianer (Apache)"] },
         { "good":["Snike", "Rifle"]},
         { "great":[]},
         { "excellent":[]}
