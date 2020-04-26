@@ -30,7 +30,9 @@ app.post("/discord-webhook", (req, res) => {
     res.status(200).send("Status 200 sent")
     console.log("req.body: ")
     console.log(req.body)
-    sendDiscordMessage(req.body)
+    console.log("req.body.content: ")
+    console.log(req.body.content)
+    sendDiscordMessage(req.body.content)
 });
 
 
@@ -119,6 +121,6 @@ function sendDiscordMessage(message) {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({"username": "Tavernish", "content": `Tavernish: ${message}`})
+        body: JSON.stringify({"username": "Tavernish", "content": `🎲 ${message}`})
     });
 }
