@@ -338,7 +338,8 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
         console.log("Sending message to Discord: ")
         console.log(message)
         var request = new XMLHttpRequest(); // create an xmlhttp object
-        request.open("GET", "/discord-webhook"); // means GET stuff in there
+        request.open("POST", "/discord-webhook"); // means GET stuff in there
+        request.setRequestHeader("Content-Type", "text/plain");
 
         // wait for the response
         request.addEventListener("readystatechange", function() {
