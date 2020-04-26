@@ -339,7 +339,7 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
         console.log(message)
         var request = new XMLHttpRequest(); // create an xmlhttp object
         request.open("POST", "/discord-webhook"); // means GET stuff in there
-        request.setRequestHeader("Content-Type", "text/plain");
+        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
         // wait for the response
         request.addEventListener("readystatechange", function() {
@@ -352,7 +352,7 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
         })       
 
         //send request
-        request.send(message); 
+        request.send(JSON.stringify(discordMessage(message))); 
     }
     var toggleButtons = function() {
         
@@ -383,6 +383,12 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                 }
             }
         }
+    
+    var discordMessage = function(text) {
+        return {
+            content: text
+        }
+    }
     
     var updateAfterRoll = function(lvl, text) {
         window.scroll(0,0);
