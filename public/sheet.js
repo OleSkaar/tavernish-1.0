@@ -335,6 +335,8 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
         };
     
     function sendDiscordWebhook(message) {
+        console.log("Sending message to Discord: ")
+        console.log(message)
         var request = new XMLHttpRequest(); // create an xmlhttp object
         request.open("GET", "/discord-webhook"); // means GET stuff in there
 
@@ -346,7 +348,7 @@ var controller = (function(dataCtrl, UICtrl, logCtrl) {
                console.log("GET request received by  Discord.");
             }
 
-    })       
+        })       
 
         //send request
         request.send(message); 

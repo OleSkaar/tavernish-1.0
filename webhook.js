@@ -119,6 +119,6 @@ function sendDiscordMessage(message) {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({"username": "Tavernish", "content": message})
+        body: JSON.stringify({"username": "Tavernish", "content": "Diced rolled"})
     });
 }
