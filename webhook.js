@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 var x, y;
 
-const discordWebhookUrl = "https://discordapp.com/api/webhooks/703977756945285160/fwjGm7Ui0Mt-lyXGujlgB_mvJ8uS_22Ov7elBd_cHMnEf0tkNXm4ewJ-QkiYtOu1NQ80";
+const discordWebhookUrl = process.env.DISCORD_WEBHOOK_URL
 
 
 const server = app.listen(process.env.PORT || 5000, () => {
